@@ -37,7 +37,7 @@ class FirebaseAuthImpl extends FirebaseAuthService {
   }
 
   @override
-  Future<bool> signIn() async {
+  Future<String> signIn() async {
     /*try {
       final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
       print('Google user:');

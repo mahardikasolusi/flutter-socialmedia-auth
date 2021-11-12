@@ -16,8 +16,9 @@ class FirebaseAuthInitial extends FirebaseAuthState {
 
 class FirebaseAuthSuccess extends FirebaseAuthState {
   final User firebaseUser;
+  final String accessToken;
 
-  FirebaseAuthSuccess(this.firebaseUser);
+  FirebaseAuthSuccess(this.firebaseUser, this.accessToken);
 
   @override
   List<Object> get props => [];

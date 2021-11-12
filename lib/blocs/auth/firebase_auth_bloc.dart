@@ -38,11 +38,13 @@ class FirebaseAuthBloc extends Bloc<FirebaseAuthEvent, FirebaseAuthState> {
     String token;
 
     try {
-      bool isLoginSuccessful = await firebaseAuthService.signIn();
+
+      /// The OAuth2 access token to access Google services.
+      final String accessToken = await firebaseAuthService.signIn();
       if (deviceToken != null) {
         token = await deviceToken();
       }
-      if (!isLoginSuccessful) {
+      if (accessToken == null) {
         yield FirebaseAuthFailure('Google login error');
       } else {
         User firebaseUser = await firebaseAuthService.currentUser();
@@ -52,7 +54,7 @@ class FirebaseAuthBloc extends Bloc<FirebaseAuthEvent, FirebaseAuthState> {
           yield FirebaseAuthFailure('Unauthorized user');
         }
 
-        yield FirebaseAuthSuccess(firebaseUser);
+        yield FirebaseAuthSuccess(firebaseUser, accessToken);
       }
     } catch(e) {
       yield FirebaseAuthFailure(e.toString());
