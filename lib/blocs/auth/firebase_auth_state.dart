@@ -32,3 +32,8 @@ class FirebaseAuthFailure extends FirebaseAuthState {
   @override
   List<Object> get props => [];
 }
+
+class FirebaseAuthSignOutSuccess extends FirebaseAuthState {
+  @override
+  List<Object> get props => [];
+}

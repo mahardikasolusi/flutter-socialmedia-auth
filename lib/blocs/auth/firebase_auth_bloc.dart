@@ -78,6 +78,13 @@ class FirebaseAuthBloc extends Bloc<FirebaseAuthEvent, FirebaseAuthState> {
   }
 
   Stream<FirebaseAuthState> _authSignOut(FirebaseAuthSignOut firebaseAuthSignOut) async* {
+    try {
+      User firebaseUser = await firebaseAuthService.currentUser();
+      await firebaseAuthService.signOut();
 
+      yield FirebaseAuthSignOutSuccess();
+    } catch (e, s) {
+      yield FirebaseAuthFailure(e.toString());
+    }
   }
 }
